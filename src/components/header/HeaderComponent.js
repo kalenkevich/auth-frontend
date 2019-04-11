@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
-import { Link, withRouter } from 'react-router-dom';
-import Button from '../common/button';
-import SettingsContext from '../../context/SettingsContext';
+import { withRouter } from 'react-router-dom';
+import { Button, Header } from '@zenvo/core-ui';
 import HeaderComponentStyle from './HeaderComponentStyle';
+import SettingsContext from '../../context/SettingsContext';
 import AuthorizationContext from '../../context/AuthorizationContext';
 
 const HeaderComponent = (props) => {
@@ -37,10 +37,9 @@ const HeaderComponent = (props) => {
   }
 
   return (
-    <div className={classes.headerContainer}>
-      <Link className={classes.brandTitle} to='/'>{AppName}</Link>
+    <Header appName={AppName}>
       {ResultPanel}
-    </div>
+    </Header>
   );
 };
 

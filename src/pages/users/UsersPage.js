@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
-import Icon from '../../components/common/icon';
+import { Icon } from '@zenvo/core-ui';
 import UsersPageStyles from './UsersPageStyle';
 import UsersPageService from './UsersPageService';
 import AuthorizationContext from '../../context/AuthorizationContext';

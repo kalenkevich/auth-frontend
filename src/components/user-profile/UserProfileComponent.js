@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
-import Icon from '../common/icon';
+import { Icon } from '@zenvo/core-ui';
 import UserProfileComponentStyle from './UserProfileComponentStyle';
 
 const UserProfileComponent = (props) => {

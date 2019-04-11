@@ -1,10 +1,14 @@
 import gql from 'graphql-tag';
+import { UserFragment } from '@zenvo/core-ui';
 import BackendGraphQLConnector from './BackendGraphQLConnector';
-import UserFragment from '../fragments/userFragment';
 
-export default class UserProfilePageService {
-  static async getUsers() {
-    const { getAllUsers: users } = await BackendGraphQLConnector.query({
+class UserProfilePageService {
+  constructor(backendGraphQLConnector) {
+    this.backendGraphQLConnector = backendGraphQLConnector;
+  }
+
+  async getUsers() {
+    const { getAllUsers: users } = await this.backendGraphQLConnector.query({
       query: gql`
         query GetAllUsers {
           getAllUsers{
@@ -18,8 +22,8 @@ export default class UserProfilePageService {
     return users;
   }
 
-  static async getUser(userId) {
-    const { getUser: user } = await BackendGraphQLConnector.query({
+  async getUser(userId) {
+    const { getUser: user } = await this.backendGraphQLConnector.query({
       variables: { userId: parseInt(userId, 10) },
       query: gql`
         query GetUserAndPosts($userId: Float!) {
@@ -34,3 +38,5 @@ export default class UserProfilePageService {
     return user;
   }
 }
+
+export default new UserProfilePageService(BackendGraphQLConnector);

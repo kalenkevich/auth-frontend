@@ -2,9 +2,7 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
-import Input from '../../components/common/input';
-import Button from '../../components/common/button';
-import Label from '../../components/common/label';
+import { Input, Button, Label } from '@zenvo/core-ui';
 import AuthorizationContext from '../../context/AuthorizationContext';
 import SignInPageStyle from './SignInPageStyle';
 

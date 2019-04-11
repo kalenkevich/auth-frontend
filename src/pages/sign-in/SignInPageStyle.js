@@ -1,4 +1,4 @@
-import FormStyles from '../../components/form/FormStyles';
+import { FormStyles } from '@zenvo/core-ui';
 
 export default (theme) => {
   const formStyles = FormStyles(theme);
