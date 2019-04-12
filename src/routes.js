@@ -12,6 +12,9 @@ export const SingInPage = loadable(
 export const SingUpPage = loadable(
   () => import(/* webpackChunkName: "SingUpPage" */ './pages/sign-up'),
 );
+export const SingOutPage = loadable(
+  () => import(/* webpackChunkName: "SingOutPage" */ './pages/sign-out'),
+);
 export const UserProfilePage = loadable(
   () => import(/* webpackChunkName: "UserProfilePage" */ './pages/user-profile'),
 );
@@ -34,6 +37,11 @@ export default () => {
       <Route
         component={SingUpPage}
         path={'/sign-up'}
+        exact={true}
+      />
+      <Route
+        component={SingOutPage}
+        path={'/sign-out'}
         exact={true}
       />
       <ProtectedRoute

@@ -42,7 +42,6 @@ const AuthorizationComponent = ({ children, history }) => {
       user = await AuthorizationService.signIn(...args);
 
       setAuthorizedUser(user);
-      history.push('');
     } catch (e) {
       error = e;
     } finally {
@@ -59,7 +58,6 @@ const AuthorizationComponent = ({ children, history }) => {
       user = await AuthorizationService.signUp(...args);
 
       setAuthorizedUser(user);
-      history.push('');
     } catch (e) {
       error = e;
     } finally {
@@ -77,7 +75,6 @@ const AuthorizationComponent = ({ children, history }) => {
 
       setAuthorizedUser(null);
       user = null;
-      history.push('');
     } catch (e) {
       error = e;
     } finally {

@@ -14,9 +14,13 @@ const SignInPage = (props) => {
   const forPasswordInput = getForInput({ placeholder: 'Password', type: 'password' });
   const trySignIn = async () => {
     const [user, error] = await signIn(forEmailInput.value, forPasswordInput.value);
+    const rawReturnUrl = new URLSearchParams(history.location.search).get('returnUrl');
+    const returnUrl = rawReturnUrl && decodeURIComponent(rawReturnUrl);
 
     if (error) {
-      forErrorLabel.setSignUpError(error.message);
+      return forErrorLabel.setSignUpError(error.message);
+    } if (returnUrl) {
+      window.location.href = returnUrl
     } else {
       history.push(`/user/${user.id}`);
     }
