@@ -20,7 +20,7 @@ const HeaderComponent = (props) => {
     ResultPanel = (
       <div className={classes.actionPanel}>
         <Button className={classes.actionPanelButton}>
-          Hello, ${authorizedUser.name}
+          Hello, {authorizedUser.name}
         </Button>
         { canShowUsersPage ? (
           <Button className={classes.actionPanelButton}
