@@ -13,7 +13,7 @@ const SignInPage = (props) => {
   const forEmailInput = getForInput({ placeholder: 'Email' });
   const forPasswordInput = getForInput({ placeholder: 'Password', type: 'password' });
   const trySignIn = async () => {
-    const [user, error] = await signIn(forEmailInput.value, forPasswordInput.value);
+    const [, error] = await signIn(forEmailInput.value, forPasswordInput.value);
     const rawReturnUrl = new URLSearchParams(history.location.search).get('returnUrl');
     const returnUrl = rawReturnUrl && decodeURIComponent(rawReturnUrl);
 
@@ -22,7 +22,7 @@ const SignInPage = (props) => {
     } if (returnUrl) {
       window.location.href = returnUrl
     } else {
-      history.push(`/user/${user.id}`);
+      history.push('/user/me');
     }
   };
 
@@ -44,6 +44,13 @@ const SignInPage = (props) => {
           >
             Sign Up
           </Button>
+        </div>
+        <div className={classes.formField}>
+          <div className={`${classes.formField} ${classes.resetPasswordLink}`}
+            onClick={() => history.push('/reset/password/initiate')}
+          >
+            Forgot password?
+          </div>
         </div>
       </div>
     </div>

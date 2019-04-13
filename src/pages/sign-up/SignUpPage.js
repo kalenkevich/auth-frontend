@@ -16,19 +16,23 @@ const SignUpPage = (props) => {
   const forPasswordInput = getForInput({ placeholder: 'Password', type: 'password' });
   const forRepeatPasswordInput = getForInput({ placeholder: 'Repeat Password', type: 'password' });
   const trySignUp = async () => {
-    const [, error] = await signUp(forNameInput.value, forEmailInput.value, forPasswordInput.value);
-    const rawReturnUrl = new URLSearchParams(history.location.search).get('returnUrl');
-    const returnUrl = rawReturnUrl && decodeURIComponent(rawReturnUrl);
+    if (forPasswordInput.value !== forRepeatPasswordInput.value) {
+      return forErrorLabel.setSignUpError('Password and Repeat Password don\'t match');
+    } else {
+      const [, error] = await signUp(forNameInput.value, forEmailInput.value, forPasswordInput.value);
+      const rawReturnUrl = new URLSearchParams(history.location.search).get('returnUrl');
+      const returnUrl = rawReturnUrl && decodeURIComponent(rawReturnUrl);
 
-    if (error) {
-      return forErrorLabel.setSignUpError(error.message);
+      if (error) {
+        return forErrorLabel.setSignUpError(error.message);
+      }
+
+      if (returnUrl) {
+        localStorage.setItem('returnUrl', JSON.stringify(returnUrl));
+      }
+
+      history.push('/verify/email/initiate');
     }
-
-    if (returnUrl) {
-      localStorage.setItem('returnUrl', JSON.stringify(returnUrl));
-    }
-
-    history.push('/verification/wait');
   };
 
   return (

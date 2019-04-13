@@ -4,11 +4,11 @@ import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
 import UserService from '../../services/UserService';
 
-const VerifyEmailPageStyles = {
+const VerifyEmailConfirmPageStyles = {
   page: {},
 };
 
-const VerifyEmailPage = (props) => {
+const VerifyEmailConfirmPage = (props) => {
   const { classes, history } = props;
   const verifyEmail = async () => {
     const rawVerificationToken = new URLSearchParams(history.location.search).get('token');
@@ -42,9 +42,9 @@ const VerifyEmailPage = (props) => {
   </div>;
 };
 
-VerifyEmailPage.propTypes = {
+VerifyEmailConfirmPage.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object,
 };
 
-export default withRouter(withStyles(VerifyEmailPageStyles)(VerifyEmailPage));
+export default withRouter(withStyles(VerifyEmailConfirmPageStyles)(VerifyEmailConfirmPage));

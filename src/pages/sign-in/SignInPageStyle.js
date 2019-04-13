@@ -16,5 +16,8 @@ export default (theme) => {
         marginRight: '0',
       },
     },
+    resetPasswordLink: {
+      cursor: 'pointer',
+    },
   };
 };

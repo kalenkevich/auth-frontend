@@ -15,11 +15,17 @@ export const SingUpPage = loadable(
 export const SingOutPage = loadable(
   () => import(/* webpackChunkName: "SingOutPage" */ './pages/sign-out'),
 );
-export const VerificationWaitPage = loadable(
-  () => import(/* webpackChunkName: "VerificationWaitPage" */ './pages/verification-wait'),
+export const VerifyEmailInitiatePage = loadable(
+  () => import(/* webpackChunkName: "VerifyEmailInitiatePage" */ './pages/verify-email-initiate'),
 );
-export const VerifyEmailPage = loadable(
-  () => import(/* webpackChunkName: "VerifyEmailPage" */ './pages/verify-email'),
+export const VerifyEmailConfirmPage = loadable(
+  () => import(/* webpackChunkName: "VerifyEmailConfirmPage" */ './pages/verify-email-confirm'),
+);
+export const ResetPasswordInitiatePage = loadable(
+  () => import(/* webpackChunkName: "VerificationWaitPage" */ './pages/reset-password-initiate'),
+);
+export const ResetPasswordConfirmPage = loadable(
+  () => import(/* webpackChunkName: "VerifyEmailPage" */ './pages/reset-password-confirm'),
 );
 export const UserProfilePage = loadable(
   () => import(/* webpackChunkName: "UserProfilePage" */ './pages/user-profile'),
@@ -51,13 +57,23 @@ export default () => {
         exact={true}
       />
       <Route
-        component={VerifyEmailPage}
-        path={'/verify'}
+        component={VerifyEmailInitiatePage}
+        path={'/verify/email/initiate'}
         exact={true}
       />
       <Route
-        component={VerificationWaitPage}
-        path={'/verification/wait'}
+        component={VerifyEmailConfirmPage}
+        path={'/verify/email/confirm'}
+        exact={true}
+      />
+      <Route
+        component={ResetPasswordInitiatePage}
+        path={'/reset/password/initiate'}
+        exact={true}
+      />
+      <Route
+        component={ResetPasswordConfirmPage}
+        path={'/reset/password/confirm'}
         exact={true}
       />
       <ProtectedRoute

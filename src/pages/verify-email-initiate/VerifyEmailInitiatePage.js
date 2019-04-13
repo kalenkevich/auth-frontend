@@ -6,7 +6,7 @@ import { Button } from '@zenvo/core-ui';
 import AuthorizationContext from '../../context/AuthorizationContext';
 import UserService from '../../services/UserService';
 
-const VerificationWaitPageStyles = {
+const VerifyEmailInitiatePageStyles = {
   page: {
     display: 'flex',
     flexDirection: 'column',
@@ -28,7 +28,7 @@ const VerificationWaitPageStyles = {
   },
 };
 
-const VerificationWaitPage = (props) => {
+const VerifyEmailInitiatePage = (props) => {
   const { classes } = props;
   const { user } = useContext(AuthorizationContext);
   const resendEmail = async () => {
@@ -54,9 +54,9 @@ const VerificationWaitPage = (props) => {
   );
 };
 
-VerificationWaitPage.propTypes = {
+VerifyEmailInitiatePage.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object,
 };
 
-export default withRouter(withStyles(VerificationWaitPageStyles)(VerificationWaitPage));
+export default withRouter(withStyles(VerifyEmailInitiatePageStyles)(VerifyEmailInitiatePage));
