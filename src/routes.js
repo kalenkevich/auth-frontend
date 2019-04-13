@@ -15,6 +15,12 @@ export const SingUpPage = loadable(
 export const SingOutPage = loadable(
   () => import(/* webpackChunkName: "SingOutPage" */ './pages/sign-out'),
 );
+export const VerificationWaitPage = loadable(
+  () => import(/* webpackChunkName: "VerificationWaitPage" */ './pages/verification-wait'),
+);
+export const VerifyEmailPage = loadable(
+  () => import(/* webpackChunkName: "VerifyEmailPage" */ './pages/verify-email'),
+);
 export const UserProfilePage = loadable(
   () => import(/* webpackChunkName: "UserProfilePage" */ './pages/user-profile'),
 );
@@ -42,6 +48,16 @@ export default () => {
       <Route
         component={SingOutPage}
         path={'/sign-out'}
+        exact={true}
+      />
+      <Route
+        component={VerifyEmailPage}
+        path={'/verify'}
+        exact={true}
+      />
+      <Route
+        component={VerificationWaitPage}
+        path={'/verification/wait'}
         exact={true}
       />
       <ProtectedRoute

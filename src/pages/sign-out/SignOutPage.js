@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
-import { Input, Button, Label } from '@zenvo/core-ui';
 import AuthorizationContext from '../../context/AuthorizationContext';
 
 const SignOutPageStyle = {

@@ -37,6 +37,31 @@ class UserProfilePageService {
 
     return user;
   }
+
+  async verifyEmail(verificationToken) {
+    const { verifyEmail: result } = await this.backendGraphQLConnector.query({
+      variables: { verificationToken },
+      query: gql`
+        query VerifyEmail($verificationToken: String!) {
+          verifyEmail(verificationToken: $verificationToken)
+        }
+      `,
+    });
+
+    return result;
+  }
+
+  async resendVerificationEmail() {
+    const { resendVerificationEmail: result } = await this.backendGraphQLConnector.query({
+      query: gql`
+        query ResendVerificationEmail {
+          resendVerificationEmail
+        }
+      `,
+    });
+
+    return result;
+  }
 }
 
 export default new UserProfilePageService(BackendGraphQLConnector);

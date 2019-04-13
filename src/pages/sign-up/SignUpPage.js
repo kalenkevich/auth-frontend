@@ -16,17 +16,19 @@ const SignUpPage = (props) => {
   const forPasswordInput = getForInput({ placeholder: 'Password', type: 'password' });
   const forRepeatPasswordInput = getForInput({ placeholder: 'Repeat Password', type: 'password' });
   const trySignUp = async () => {
-    const [user, error] = await signUp(forNameInput.value, forEmailInput.value, forPasswordInput.value);
+    const [, error] = await signUp(forNameInput.value, forEmailInput.value, forPasswordInput.value);
     const rawReturnUrl = new URLSearchParams(history.location.search).get('returnUrl');
     const returnUrl = rawReturnUrl && decodeURIComponent(rawReturnUrl);
 
     if (error) {
       return forErrorLabel.setSignUpError(error.message);
-    } else if (returnUrl) {
-      window.location.href = returnUrl
-    } else {
-      history.push(`/user/${user.id}`);
     }
+
+    if (returnUrl) {
+      localStorage.setItem('returnUrl', JSON.stringify(returnUrl));
+    }
+
+    history.push('/verification/wait');
   };
 
   return (

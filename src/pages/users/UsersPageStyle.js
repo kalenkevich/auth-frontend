@@ -11,14 +11,14 @@ export default (theme) => ({
     boxSizing: 'border-box',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     padding: '20px',
     marginBottom: '20px',
     border: theme.border,
     borderRadius: theme.borderRadius,
   },
   userAvatar: {
-
+    borderRadius: theme.borderRadius,
   },
   userRoles: {
 
