@@ -22,7 +22,7 @@ const ResetPasswordInitiatePage = (props) => {
         <div className={classes.formField}>Reset Password</div>
         <Input className={classes.formField} {...forEmailInput}/>
         { alreadySend ? <div className={classes.formField}>
-          We send an mail with link to reset a password, please check your email
+          We send a mail with link to reset a password, please check your email
         </div> : null }
         <div className={classes.formField}>
           <Button

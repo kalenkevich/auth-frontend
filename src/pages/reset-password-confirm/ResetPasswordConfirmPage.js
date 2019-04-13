@@ -33,7 +33,9 @@ const ResetPasswordConfirmPage = (props) => {
           if (error) {
             return forErrorLabel.setSignUpError(error.message);
           } if (returnUrl) {
-            window.location.href = returnUrl
+            localStorage.removeItem('returnUrl');
+
+            return window.location.href = returnUrl;
           } else {
             history.push(`/user/me`);
           }

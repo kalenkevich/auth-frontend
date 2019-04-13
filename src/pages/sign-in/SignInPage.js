@@ -12,10 +12,10 @@ const SignInPage = (props) => {
   const forErrorLabel = getForErrorLabel();
   const forEmailInput = getForInput({ placeholder: 'Email' });
   const forPasswordInput = getForInput({ placeholder: 'Password', type: 'password' });
+  const rawReturnUrl = new URLSearchParams(history.location.search).get('returnUrl');
+  const returnUrl = rawReturnUrl && decodeURIComponent(rawReturnUrl);
   const trySignIn = async () => {
     const [, error] = await signIn(forEmailInput.value, forPasswordInput.value);
-    const rawReturnUrl = new URLSearchParams(history.location.search).get('returnUrl');
-    const returnUrl = rawReturnUrl && decodeURIComponent(rawReturnUrl);
 
     if (error) {
       return forErrorLabel.setSignUpError(error.message);
@@ -24,6 +24,11 @@ const SignInPage = (props) => {
     } else {
       history.push('/user/me');
     }
+  };
+  const resetPassword = () => {
+    localStorage.setItem('returnUrl', JSON.stringify(returnUrl));
+
+    history.push('/reset/password/initiate')
   };
 
   return (
@@ -46,11 +51,11 @@ const SignInPage = (props) => {
           </Button>
         </div>
         <div className={classes.formField}>
-          <div className={`${classes.formField} ${classes.resetPasswordLink}`}
-            onClick={() => history.push('/reset/password/initiate')}
+          <a className={`${classes.formField} ${classes.resetPasswordLink}`}
+            onClick={resetPassword}
           >
             Forgot password?
-          </div>
+          </a>
         </div>
       </div>
     </div>
