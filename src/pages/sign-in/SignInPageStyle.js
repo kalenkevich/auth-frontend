@@ -17,12 +17,9 @@ export default (theme) => {
       },
     },
     resetPasswordLink: {
-      fontSize: '14px',
       color: theme.linkColor || '#1F7BBD',
       cursor: 'pointer',
-      '&:hover': {
-        textDecoration: 'underline',
-      }
+      border: 'none',
     },
   };
 };

@@ -4,7 +4,7 @@ import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
 import { Button, Input, Label } from '@zenvo/core-ui';
 import { getForErrorLabel, getForInput } from '../sign-in/SignInPage';
-import UserService from '../../services/UserService';
+import AuthorizationService from '../../services/AuthorizationService';
 import AuthorizationContext from '../../context/AuthorizationContext';
 import SignInPageStyle from '../sign-in/SignInPageStyle';
 
@@ -24,7 +24,7 @@ const ResetPasswordConfirmPage = (props) => {
       if (forPasswordInput.value !== forRepeatPasswordInput.value) {
         return forErrorLabel.setSignUpError('Password and Repeat Password don\'t match');
       } else {
-        const result = await UserService.confirmResetPassword(email, verificationToken, forPasswordInput.value);
+        const result = await AuthorizationService.confirmResetPassword(email, verificationToken, forPasswordInput.value);
 
         if (result) {
           const returnUrl = JSON.parse(localStorage.getItem('returnUrl'));

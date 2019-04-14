@@ -4,7 +4,7 @@ import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
 import { Button } from '@zenvo/core-ui';
 import AuthorizationContext from '../../context/AuthorizationContext';
-import UserService from '../../services/UserService';
+import AuthorizationService from '../../services/AuthorizationService';
 
 const VerifyEmailInitiatePageStyles = {
   page: {
@@ -32,7 +32,7 @@ const VerifyEmailInitiatePage = (props) => {
   const { classes } = props;
   const { user } = useContext(AuthorizationContext);
   const resendEmail = async () => {
-    await UserService.resendVerificationEmail();
+    await AuthorizationService.resendVerificationEmail();
   };
 
   return (

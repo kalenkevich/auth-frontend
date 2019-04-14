@@ -7,6 +7,7 @@ import ApplicationLoading from '../application/ApplicationLoadingComponent';
 const AuthorizationContext = React.createContext({
   user: null,
   signIn: () => {},
+  signInWith: () => {},
   signUp: () => {},
   signOut: () => {},
 });
@@ -40,6 +41,22 @@ const AuthorizationComponent = ({ children, history }) => {
 
     try {
       user = await AuthorizationService.signIn(...args);
+
+      setAuthorizedUser(user);
+    } catch (e) {
+      error = e;
+    } finally {
+      setAuthorizationProcessState(false);
+    }
+
+    return [user, error];
+  };
+  const signInWith = async (...args) => {
+    let user = null;
+    let error = null;
+
+    try {
+      user = await AuthorizationService.signInWith(...args);
 
       setAuthorizedUser(user);
     } catch (e) {
@@ -91,6 +108,7 @@ const AuthorizationComponent = ({ children, history }) => {
     <AuthorizationProvider value={{
       user: authorizedUser,
       signIn,
+      signInWith,
       signUp,
       signOut,
     }}>

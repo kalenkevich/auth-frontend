@@ -1,26 +1,19 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-  faSave,
-  faUndo,
-  faPlus,
-  faUser,
-  faSignOutAlt,
-  faCommentAlt,
-  faTimes,
-  faPencilAlt,
-} from '@fortawesome/free-solid-svg-icons';
-import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
+  faTwitter,
+  faFacebook,
+  faLinkedin,
+  faVk,
+  faInstagram,
+  faGoogle,
+} from '@fortawesome/free-brands-svg-icons';
 
-library.add(faSave);
-library.add(faUndo);
-library.add(faPlus);
-library.add(faUser);
-library.add(faTimes);
-library.add(faPencilAlt);
-library.add(faCommentAlt);
-library.add(faSignOutAlt);
-library.add(faThumbsUp);
-library.add(faThumbsDown);
+library.add(faTwitter);
+library.add(faFacebook);
+library.add(faLinkedin);
+library.add(faVk);
+library.add(faInstagram);
+library.add(faGoogle);
 
 export default {
   applicationWrapper: {

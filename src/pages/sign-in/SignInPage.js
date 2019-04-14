@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
 import { Input, Button, Label } from '@zenvo/core-ui';
+import SocialPanel from '../../components/social-panel';
+import SocialAuthorizationService from '../../services/SocialAuthorizationService';
 import AuthorizationContext from '../../context/AuthorizationContext';
 import SignInPageStyle from './SignInPageStyle';
 
@@ -30,11 +32,19 @@ const SignInPage = (props) => {
 
     history.push('/reset/password/initiate')
   };
+  const onSocialButtonClick = async (provider) => {
+    localStorage.setItem('returnUrl', JSON.stringify(returnUrl));
+
+    return SocialAuthorizationService.initiateSocialSignIn(provider);
+  };
 
   return (
     <div className={classes.page}>
       <div className={classes.form}>
         <div className={classes.formField}>Sign In</div>
+        <SocialPanel className={classes.formField}
+          onClick={onSocialButtonClick}
+        />
         <Label className={classes.formLabel} {...forErrorLabel}/>
         <Input className={classes.formField} {...forEmailInput}/>
         <Input className={classes.formField} {...forPasswordInput}/>
@@ -51,11 +61,11 @@ const SignInPage = (props) => {
           </Button>
         </div>
         <div className={classes.formField}>
-          <a className={`${classes.formField} ${classes.resetPasswordLink}`}
+          <Button className={`${classes.actionButton} ${classes.resetPasswordLink}`}
             onClick={resetPassword}
           >
             Forgot password?
-          </a>
+          </Button>
         </div>
       </div>
     </div>

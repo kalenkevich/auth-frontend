@@ -4,7 +4,7 @@ import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
 import { Button, Input, Label } from '@zenvo/core-ui';
 import { getForInput } from '../sign-in/SignInPage';
-import UserService from '../../services/UserService';
+import AuthorizationService from '../../services/AuthorizationService';
 import SignInPageStyle from '../sign-in/SignInPageStyle';
 
 const ResetPasswordInitiatePage = (props) => {
@@ -12,7 +12,7 @@ const ResetPasswordInitiatePage = (props) => {
   const [alreadySend, setAlreadySend] = useState(false);
   const forEmailInput = getForInput({ placeholder: 'Email' });
   const resetPassword = async () => {
-    await UserService.initiateResetPassword(forEmailInput.value);
+    await AuthorizationService.initiateResetPassword(forEmailInput.value);
     setAlreadySend(true);
   };
 

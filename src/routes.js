@@ -27,6 +27,9 @@ export const ResetPasswordInitiatePage = loadable(
 export const ResetPasswordConfirmPage = loadable(
   () => import(/* webpackChunkName: "VerifyEmailPage" */ './pages/reset-password-confirm'),
 );
+export const SocialCallbackPage = loadable(
+  () => import(/* webpackChunkName: "SocialCallbackPage" */ './pages/social-callback'),
+);
 export const UserProfilePage = loadable(
   () => import(/* webpackChunkName: "UserProfilePage" */ './pages/user-profile'),
 );
@@ -74,6 +77,11 @@ export default () => {
       <Route
         component={ResetPasswordConfirmPage}
         path={'/reset/password/confirm'}
+        exact={true}
+      />
+      <Route
+        component={SocialCallbackPage}
+        path={'/social/:provider/callback'}
         exact={true}
       />
       <ProtectedRoute

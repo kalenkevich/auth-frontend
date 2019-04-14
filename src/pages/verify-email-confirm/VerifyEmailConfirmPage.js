@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
-import UserService from '../../services/UserService';
+import AuthorizationService from '../../services/AuthorizationService';
 
 const VerifyEmailConfirmPageStyles = {
   page: {},
@@ -16,7 +16,7 @@ const VerifyEmailConfirmPage = (props) => {
 
     if (verificationToken) {
       try {
-        await UserService.verifyEmail(verificationToken);
+        await AuthorizationService.verifyEmail(verificationToken);
 
         const returnUrl = JSON.parse(localStorage.getItem('returnUrl'));
 
