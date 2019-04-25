@@ -56,6 +56,7 @@ const SignInPage = (props) => {
           </Button>
           <Button onClick={() => history.push('/sign-up')}
             className={classes.actionButton}
+            type='secondary'
           >
             Sign Up
           </Button>
@@ -63,6 +64,7 @@ const SignInPage = (props) => {
         <div className={classes.formField}>
           <Button className={`${classes.actionButton} ${classes.resetPasswordLink}`}
             onClick={resetPassword}
+            type='secondary'
           >
             Forgot password?
           </Button>

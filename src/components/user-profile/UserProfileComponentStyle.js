@@ -1,7 +1,7 @@
 export default theme => ({
   userProfilePageContainer: {
     display: 'flex',
-    border: `1px solid ${theme.brandPrimaryColor}`,
+    border: theme.border,
     borderRadius: theme.borderRadius,
     padding: '5px',
   },

@@ -23,17 +23,22 @@ const HeaderComponent = (props) => {
       <div className={classes.actionPanel}>
         <Button className={classes.actionPanelButton}
           onClick={() => history.push('/user/me')}
+          type='secondary'
         >
           Hello, {authorizedUser.name}
         </Button>
         { canShowUsersPage ? (
           <Button className={classes.actionPanelButton}
-                  onClick={() => history.push('/users')}
+            type='secondary'
+            onClick={() => history.push('/users')}
           >
             Users
           </Button>
         ) : null }
-        <Button className={classes.actionPanelButton} onClick={signOut}>
+        <Button className={classes.actionPanelButton}
+          onClick={signOut}
+          type='secondary'
+        >
           Sign Out
         </Button>
       </div>

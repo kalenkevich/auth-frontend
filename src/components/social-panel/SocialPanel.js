@@ -24,7 +24,11 @@ const SocialPanel = (props) => {
   return (
     <div className={`${classes.root} ${className}`}>
       {providers.map(provider => (
-        <Button key={provider} className={classes.socialButton} onClick={() => onClick(provider)}>
+        <Button key={provider}
+          type='secondary'
+          className={classes.socialButton}
+          onClick={() => onClick(provider)}
+        >
           <FontAwesomeIcon icon={['fab', provider]}/>
         </Button>
       ))}

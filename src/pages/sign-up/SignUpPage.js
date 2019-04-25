@@ -63,6 +63,7 @@ const SignUpPage = (props) => {
           </Button>
           <Button onClick={() => history.push('/sign-in')}
             className={classes.actionButton}
+            type='secondary'
           >
               Sign In
           </Button>
