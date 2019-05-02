@@ -60,10 +60,7 @@ const HeaderComponent = (props) => {
               return signOut();
             }
           }}
-          options={[{
-            label: 'Sign Out',
-            value: 'signOut',
-          }]}
+          options={options}
           preview={() => (
             <div className={classes.userPanel}>
               <Avatar
