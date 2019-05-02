@@ -2,7 +2,13 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
-import { Button, Header } from '@zenvo/core-ui';
+import {
+  Button,
+  Header,
+  Select,
+  MobileContext,
+  Avatar,
+} from '@zenvo/core-ui';
 import HeaderComponentStyle from './HeaderComponentStyle';
 import SettingsContext from '../../context/SettingsContext';
 import AuthorizationContext from '../../context/AuthorizationContext';
@@ -10,6 +16,7 @@ import AuthorizationContext from '../../context/AuthorizationContext';
 const HeaderComponent = (props) => {
   const { classes, history } = props;
   const { AppName } = useContext(SettingsContext);
+  const { isMobile } = useContext(MobileContext);
   const { user: authorizedUser, signOut } = useContext(AuthorizationContext);
   const canShowUsersPage =
     authorizedUser &&
@@ -19,28 +26,55 @@ const HeaderComponent = (props) => {
   let ResultPanel = null;
 
   if (authorizedUser) {
+    const options = [{
+      label: 'My Profile',
+      value: 'profile',
+    }];
+
+    if (canShowUsersPage) {
+      options.push({
+        label: 'Users',
+        value: 'users',
+      });
+    }
+
+    options.push({
+      label: 'Sign Out',
+      value: 'signOut',
+    });
+
     ResultPanel = (
       <div className={classes.actionPanel}>
-        <Button className={classes.actionPanelButton}
-          onClick={() => history.push('/user/me')}
-          type='secondary'
-        >
-          Hello, {authorizedUser.name}
-        </Button>
-        { canShowUsersPage ? (
-          <Button className={classes.actionPanelButton}
-            type='secondary'
-            onClick={() => history.push('/users')}
-          >
-            Users
-          </Button>
-        ) : null }
-        <Button className={classes.actionPanelButton}
-          onClick={signOut}
-          type='secondary'
-        >
-          Sign Out
-        </Button>
+        <Select
+          value={''}
+          onSelect={({ value }) => {
+            if (value === 'profile') {
+              return history.push('/user/me');
+            }
+
+            if (value === 'users') {
+              return history.push('/users')
+            }
+
+            if (value === 'signOut') {
+              return signOut();
+            }
+          }}
+          options={[{
+            label: 'Sign Out',
+            value: 'signOut',
+          }]}
+          preview={() => (
+            <div className={classes.userPanel}>
+              <Avatar
+                className={classes.userAvatar}
+                url={authorizedUser.avatarUrl}
+                size='sm'
+              />
+              { !isMobile ? <div className={classes.userName}>{authorizedUser.name}</div>: null }
+            </div>
+          )}
+        />
       </div>
     );
   } else if (canShowSignUpPanel) {

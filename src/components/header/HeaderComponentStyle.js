@@ -17,6 +17,17 @@ export default theme => ({
       color: theme.titleHoverColor,
     },
   },
+  userPanel: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    cursor: 'pointer',
+  },
+  userAvatar: {},
+  userName: {
+    width: '100px',
+    marginLeft: '10px',
+  },
   actionPanel: {
     display: 'flex',
     justifyContent: 'space-between',
