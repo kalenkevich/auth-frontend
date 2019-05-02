@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
-import { Icon } from '@zenvo/core-ui';
+import { Avatar, LabeledText } from '@zenvo/core-ui';
 import UserProfileComponentStyle from './UserProfileComponentStyle';
 
 const UserProfileComponent = (props) => {
@@ -13,23 +13,15 @@ const UserProfileComponent = (props) => {
 
   return (
     <div className={`${className} ${classes.userProfilePageContainer}`}>
-      <div>
-        <Icon
+        <Avatar
           className={classes.userAvatarUrl}
-          src={user.avatarUrl}
-          width={150}
-          height={150}
-          type={'USER_ICON'}
+          url={user.avatarUrl}
+          size='lg'
         />
-      </div>
       <div className={classes.userDetails}>
-        <div className={classes.userName}>{user.name}</div>
-        <div className={classes.userRoles}>
-          {(user.roles || []).map(role => <div key={role} className={classes.userRole}>{role}</div>)}
-        </div>
-        <div className={classes.userApplications}>
-          {(user.applications || []).map(app => <div key={app} className={classes.userApplication}>{app}</div>)}
-        </div>
+        <LabeledText label={'Name'} content={user.name}/>
+        <LabeledText label={'Email'} content={user.email}/>
+        <LabeledText label={'Roles'} content={(user.roles || []).join(', ')}/>
       </div>
     </div>
   );

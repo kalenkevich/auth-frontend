@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
-import { Icon } from '@zenvo/core-ui';
+import { Avatar, LabeledText, Select } from '@zenvo/core-ui';
 import UsersPageStyles from './UsersPageStyle';
 import UsersPageService from './UsersPageService';
 import AuthorizationContext from '../../context/AuthorizationContext';
 
-const UsersPage = ({ classes }) => {
+const UsersPage = ({ classes, history }) => {
   const [ users, setUsers ] = useState([]);
   const { user: authorizedUser } = useContext(AuthorizationContext);
 
@@ -26,26 +26,48 @@ const UsersPage = ({ classes }) => {
     fetchUsers();
   }, []);
 
+  const actionOptions = [{
+    label: 'Go to profile',
+    value: 'profile',
+    onClick: (user) => history.push(`/user/${user.id}`),
+  }, {
+    label: 'Deactivate (coming soon)',
+    value: 'deactivate',
+    disabled: true,
+    onClick: (user) => history.push(`/user/${user.id}`),
+  }];
+
   return (
     <div className={classes.root}>
       {(users || []).map(user => (
         <div className={classes.user} key={user.id}>
-          <Icon
+          <Avatar
             className={classes.userAvatar}
-            src={user.avatarUrl}
-            type={'USER_ICON'}
+            url={user.avatarUrl}
+            size='sm'
           />
-          <div className={classes.userName}>
-            { user.id === authorizedUser.id ? `${user.name} (Me)` : user.name }
-          </div>
-          <div className={classes.userRoles}>
-            {(user.roles || []).map(role => <div key={role} className={classes.userRole}>{role}</div>)}
-          </div>
-          <div className={classes.userApplications}>
-            {(user.applications || []).map(app => <div key={app} className={classes.userApplication}>{app}</div>)}
-          </div>
-          <div className={classes.actionPanel}>
-            actions
+          <LabeledText
+            className={classes.userName}
+            label={'Name'}
+            content={user.id === authorizedUser.id ? `${user.name} (Me)` : user.name }
+          />
+          <LabeledText
+            className={classes.userName}
+            label={'Email'}
+            content={user.email}
+          />
+          <LabeledText
+            className={classes.userRoles}
+            label={'Roles'}
+            content={(user.roles || []).join(', ')}
+          />
+          <div className={classes.userActionsWrapper}>
+            <Select
+              className={classes.userActions}
+              preview={() => <div className={classes.userActions}>Actions</div>}
+              options={actionOptions}
+              onSelect={(option) => option.onClick(user)}
+            />
           </div>
         </div>
       ))}

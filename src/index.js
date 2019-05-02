@@ -6,7 +6,7 @@ import { Theme } from '@zenvo/core-ui';
 import Routes from './routes';
 import Application from './application/ApplicationComponent';
 
-ReactDOM.hydrate(
+ReactDOM.render(
   <BrowserRouter>
     <ThemeProvider theme={Theme}>
       <Application>

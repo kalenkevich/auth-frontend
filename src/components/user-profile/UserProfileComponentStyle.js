@@ -18,6 +18,12 @@ export default theme => ({
   },
   userDetails: {
     marginLeft: '20px',
+    '& > *': {
+      marginTop: '10px',
+      '&:first-of-type': {
+        marginTop: '0',
+      },
+    },
   },
   userDescription: {
     marginTop: '10px',
