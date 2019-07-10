@@ -2,7 +2,13 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
-import { Input, Button, Label } from '@zenvo/core-ui';
+import {
+  Input,
+  Button,
+  Label,
+  Form,
+  FormSection,
+} from '@zenvo/core-ui';
 import SocialPanel from '../../components/social-panel';
 import SocialAuthorizationService from '../../services/SocialAuthorizationService';
 import AuthorizationContext from '../../context/AuthorizationContext';
@@ -12,8 +18,8 @@ const SignInPage = (props) => {
   const { classes, history } = props;
   const { signIn } = useContext(AuthorizationContext);
   const forErrorLabel = getForErrorLabel();
-  const forEmailInput = getForInput({ placeholder: 'Email' });
-  const forPasswordInput = getForInput({ placeholder: 'Password', type: 'password' });
+  const forEmailInput = getForInput({ placeholder: 'example@mail.com', label: 'Email' });
+  const forPasswordInput = getForInput({ placeholder: 'Your password here', label: 'Password',  type: 'password' });
   const rawReturnUrl = new URLSearchParams(history.location.search).get('returnUrl');
   const returnUrl = rawReturnUrl && decodeURIComponent(rawReturnUrl);
   const trySignIn = async () => {
@@ -40,15 +46,31 @@ const SignInPage = (props) => {
 
   return (
     <div className={classes.page}>
-      <div className={classes.form}>
-        <div className={classes.formField}>Sign In</div>
-        <SocialPanel className={classes.formField}
-          onClick={onSocialButtonClick}
-        />
-        <Label className={classes.formLabel} {...forErrorLabel}/>
-        <Input className={classes.formField} {...forEmailInput}/>
-        <Input className={classes.formField} {...forPasswordInput}/>
-        <div className={classes.formField}>
+      <Form title='Sign In' className={classes.form}>
+        <FormSection className={classes.center}>
+          <SocialPanel
+            className={classes.formField}
+            onClick={onSocialButtonClick}
+          />
+        </FormSection>
+        <FormSection>
+          <Label {...forErrorLabel}/>
+        </FormSection>
+        <FormSection>
+          <Input {...forEmailInput}/>
+        </FormSection>
+        <FormSection>
+          <Input {...forPasswordInput}/>
+        </FormSection>
+        <FormSection>
+          <Button className={`${classes.actionButton} ${classes.resetPasswordLink}`}
+                  onClick={resetPassword}
+                  type='secondary'
+          >
+            Forgot password?
+          </Button>
+        </FormSection>
+        <FormSection  className={classes.center}>
           <Button onClick={trySignIn}
             className={classes.actionButton}
           >
@@ -60,16 +82,8 @@ const SignInPage = (props) => {
           >
             Sign Up
           </Button>
-        </div>
-        <div className={classes.formField}>
-          <Button className={`${classes.actionButton} ${classes.resetPasswordLink}`}
-            onClick={resetPassword}
-            type='secondary'
-          >
-            Forgot password?
-          </Button>
-        </div>
-      </div>
+        </FormSection>
+      </Form>
     </div>
   );
 };

@@ -2,7 +2,13 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
-import { Input, Button, Label } from '@zenvo/core-ui';
+import {
+  Input,
+  Button,
+  Label,
+  Form,
+  FormSection,
+} from '@zenvo/core-ui';
 import { getForErrorLabel, getForInput } from '../sign-in/SignInPage';
 import SocialPanel from '../../components/social-panel';
 import SignUpPageStyle from './SignUpPageStyle';
@@ -44,18 +50,29 @@ const SignUpPage = (props) => {
 
   return (
     <div className={classes.page}>
-      <div className={classes.form}>
-        <div className={classes.formField}>Sign Up</div>
-        <SocialPanel
-          className={classes.formField}
-          onClick={onSocialButtonClick}
-        />
-        <Label className={classes.formLabel} {...forErrorLabel}/>
-        <Input className={classes.formField} {...forNameInput}/>
-        <Input className={classes.formField} {...forEmailInput}/>
-        <Input className={classes.formField} {...forPasswordInput}/>
-        <Input className={classes.formField} {...forRepeatPasswordInput}/>
-        <div className={classes.formField}>
+      <Form title='Sign Up' className={classes.form}>
+        <FormSection className={classes.center}>
+          <SocialPanel
+            className={classes.formField}
+            onClick={onSocialButtonClick}
+          />
+        </FormSection>
+        <FormSection>
+          <Label className={classes.formLabel} {...forErrorLabel}/>
+        </FormSection>
+        <FormSection>
+          <Input className={classes.formField} {...forNameInput}/>
+        </FormSection>
+        <FormSection>
+          <Input className={classes.formField} {...forEmailInput}/>
+        </FormSection>
+        <FormSection>
+          <Input className={classes.formField} {...forPasswordInput}/>
+        </FormSection>
+        <FormSection>
+          <Input className={classes.formField} {...forRepeatPasswordInput}/>
+        </FormSection>
+        <FormSection className={classes.center}>
           <Button onClick={trySignUp}
             className={classes.actionButton}
           >
@@ -67,8 +84,8 @@ const SignUpPage = (props) => {
           >
               Sign In
           </Button>
-        </div>
-      </div>
+        </FormSection>
+      </Form>
     </div>
   );
 };
