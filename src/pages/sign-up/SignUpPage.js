@@ -25,22 +25,23 @@ const SignUpPage = (props) => {
   const forRepeatPasswordInput = getForInput({ placeholder: 'Repeat Password', type: 'password' });
   const rawReturnUrl = new URLSearchParams(history.location.search).get('returnUrl');
   const returnUrl = rawReturnUrl && decodeURIComponent(rawReturnUrl);
+
   const trySignUp = async () => {
     if (forPasswordInput.value !== forRepeatPasswordInput.value) {
       return forErrorLabel.setSignUpError('Password and Repeat Password don\'t match');
-    } else {
-      const [, error] = await signUp(forNameInput.value, forEmailInput.value, forPasswordInput.value);
-
-      if (error) {
-        return forErrorLabel.setSignUpError(error.message);
-      }
-
-      if (returnUrl) {
-        localStorage.setItem('returnUrl', JSON.stringify(returnUrl));
-      }
-
-      history.push('/verify/email/initiate');
     }
+
+    const [, error] = await signUp(forNameInput.value, forEmailInput.value, forPasswordInput.value);
+
+    if (error) {
+      return forErrorLabel.setSignUpError(error.message);
+    }
+
+    if (returnUrl) {
+      localStorage.setItem('returnUrl', JSON.stringify(returnUrl));
+    }
+
+    return history.push('/verify/email/initiate');
   };
   const onSocialButtonClick = async (provider) => {
     localStorage.setItem('returnUrl', JSON.stringify(returnUrl));
@@ -75,6 +76,7 @@ const SignUpPage = (props) => {
         <FormSection className={classes.center}>
           <Button onClick={trySignUp}
             className={classes.actionButton}
+            type='primary'
           >
               Sign Up
           </Button>

@@ -35,6 +35,8 @@ const SocialCallbackPage = (props) => {
 
 SocialCallbackPage.propTypes = {
   classes: PropTypes.object,
+  match: PropTypes.object,
+  history: PropTypes.object,
 };
 
 export default withRouter(withStyles({})(SocialCallbackPage));

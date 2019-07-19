@@ -18,9 +18,9 @@ const HeaderComponent = (props) => {
   const { AppName } = useContext(SettingsContext);
   const { isMobile } = useContext(MobileContext);
   const { user: authorizedUser, signOut } = useContext(AuthorizationContext);
-  const canShowUsersPage =
-    authorizedUser &&
-    (authorizedUser.roles.includes('ZENVO_MANAGER') || authorizedUser.roles.includes('ZENVO_ADMIN'));
+  const canShowUsersPage = authorizedUser
+    && (authorizedUser.roles.includes('ZENVO_MANAGER')
+    || authorizedUser.roles.includes('ZENVO_ADMIN'));
   const currentLocation = history.location.pathname;
   const canShowSignUpPanel = !['/sign-in', '/sign-up'].includes(currentLocation);
   let ResultPanel = null;
@@ -45,6 +45,14 @@ const HeaderComponent = (props) => {
 
     ResultPanel = (
       <div className={classes.actionPanel}>
+        <div className={classes.userPanel}>
+          <Avatar
+            className={classes.userAvatar}
+            url={authorizedUser.avatarUrl}
+            size='sm'
+          />
+          { !isMobile && <div className={classes.userName}>{authorizedUser.name}</div> }
+        </div>
         <Select
           value={''}
           onSelect={({ value }) => {
@@ -53,24 +61,16 @@ const HeaderComponent = (props) => {
             }
 
             if (value === 'users') {
-              return history.push('/users')
+              return history.push('/users');
             }
 
             if (value === 'signOut') {
               return signOut();
             }
+
+            return null;
           }}
           options={options}
-          preview={() => (
-            <div className={classes.userPanel}>
-              <Avatar
-                className={classes.userAvatar}
-                url={authorizedUser.avatarUrl}
-                size='sm'
-              />
-              { !isMobile ? <div className={classes.userName}>{authorizedUser.name}</div>: null }
-            </div>
-          )}
         />
       </div>
     );

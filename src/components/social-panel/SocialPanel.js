@@ -10,11 +10,16 @@ const SocialPanelStyles = {
     display: 'flex',
   },
   socialButton: {
+    width: '45px',
     marginLeft: '10px',
     minWidth: 'initial',
     '&:first-of-type': {
       marginLeft: '0',
     },
+  },
+  icon: {
+    width: '25px !important',
+    height: '25px !important',
   },
 };
 
@@ -29,7 +34,10 @@ const SocialPanel = (props) => {
           className={classes.socialButton}
           onClick={() => onClick(provider)}
         >
-          <FontAwesomeIcon icon={['fab', provider]}/>
+          <FontAwesomeIcon
+            className={classes.icon}
+            icon={['fab', provider]}
+          />
         </Button>
       ))}
     </div>

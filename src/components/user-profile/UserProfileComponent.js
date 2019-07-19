@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
-import { Avatar, LabeledText } from '@zenvo/core-ui';
+import { Avatar, LabeledText, Card } from '@zenvo/core-ui';
 import UserProfileComponentStyle from './UserProfileComponentStyle';
 
 const UserProfileComponent = (props) => {
@@ -12,18 +12,18 @@ const UserProfileComponent = (props) => {
   } = props;
 
   return (
-    <div className={`${className} ${classes.userProfilePageContainer}`}>
-        <Avatar
-          className={classes.userAvatarUrl}
-          url={user.avatarUrl}
-          size='lg'
-        />
+    <Card className={`${className} ${classes.userProfilePageContainer}`}>
+      <Avatar
+        className={classes.userAvatarUrl}
+        url={user.avatarUrl}
+        size='lg'
+      />
       <div className={classes.userDetails}>
         <LabeledText label={'Name'} content={user.name}/>
         <LabeledText label={'Email'} content={user.email}/>
         <LabeledText label={'Roles'} content={(user.roles || []).join(', ')}/>
       </div>
-    </div>
+    </Card>
   );
 };
 

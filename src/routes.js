@@ -1,10 +1,14 @@
-import React, { useContext, Suspense } from 'react';
+import React, { useContext, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { lazy } from '@loadable/component';
 import AuthorizationContext from './context/AuthorizationContext';
 
-export const ProtectedRoute = ({component: RouteComponent, canAccess, redirectTo = '/sign-in', ...rest}) => (
+export const ProtectedRoute = ({
+  component: RouteComponent,
+  canAccess,
+  redirectTo = '/sign-in',
+  ...rest
+}) => (
   <Route {...rest} render={props => (canAccess ? <RouteComponent {...props} /> : <Redirect to={redirectTo}/>)}/>
 );
 export const SingInPage = lazy(
@@ -38,15 +42,26 @@ export const UsersPage = lazy(
   () => import(/* webpackChunkName: "UsersPage" */ './pages/users'),
 );
 
+ProtectedRoute.propTypes = {
+  component: PropTypes.oneOfType([
+    Route.propTypes.component,
+    PropTypes.object,
+  ]),
+  canAccess: PropTypes.bool,
+  redirectTo: PropTypes.string,
+};
+
 Route.propTypes.component = PropTypes.oneOfType([
   Route.propTypes.component,
   PropTypes.object,
 ]);
 
-export default () => {
-  const {user} = useContext(AuthorizationContext);
+const ApplicationRoutes = () => {
+  const { user } = useContext(AuthorizationContext);
   const isUserAuthorized = !!user;
-  const isAdminOrManager = user && ((user.roles || []).includes('ZENVO_ADMIN') || (user.roles || []).includes('ZENVO_MANAGER'));
+  const isAdminOrManager = user
+    && ((user.roles || []).includes('ZENVO_ADMIN')
+    || (user.roles || []).includes('ZENVO_MANAGER'));
 
   return (
     <Suspense fallback={<div></div>}>
@@ -111,4 +126,6 @@ export default () => {
       </Switch>
     </Suspense>
   );
-}
+};
+
+export default ApplicationRoutes;

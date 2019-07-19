@@ -5,9 +5,7 @@ import { withRouter } from 'react-router-dom';
 import AuthorizationContext from '../../context/AuthorizationContext';
 
 const SignOutPageStyle = {
-  page: {
-
-  },
+  page: {},
 };
 
 const SignOutPage = (props) => {
@@ -23,9 +21,9 @@ const SignOutPage = (props) => {
     }
 
     if (returnUrl) {
-      window.location.href = returnUrl
+      window.location.href = returnUrl;
     } else {
-      history.push(`/sign-in`);
+      history.push('/sign-in');
     }
   };
 

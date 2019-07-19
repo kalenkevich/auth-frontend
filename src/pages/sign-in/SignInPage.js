@@ -19,7 +19,7 @@ const SignInPage = (props) => {
   const { signIn } = useContext(AuthorizationContext);
   const forErrorLabel = getForErrorLabel();
   const forEmailInput = getForInput({ placeholder: 'example@mail.com', label: 'Email' });
-  const forPasswordInput = getForInput({ placeholder: 'Your password here', label: 'Password',  type: 'password' });
+  const forPasswordInput = getForInput({ placeholder: 'Your password here', label: 'Password', type: 'password' });
   const rawReturnUrl = new URLSearchParams(history.location.search).get('returnUrl');
   const returnUrl = rawReturnUrl && decodeURIComponent(rawReturnUrl);
   const trySignIn = async () => {
@@ -28,7 +28,7 @@ const SignInPage = (props) => {
     if (error) {
       return forErrorLabel.setSignUpError(error.message);
     } if (returnUrl) {
-      window.location.href = returnUrl
+      window.location.href = returnUrl;
     } else {
       history.push('/user/me');
     }
@@ -36,7 +36,7 @@ const SignInPage = (props) => {
   const resetPassword = () => {
     localStorage.setItem('returnUrl', JSON.stringify(returnUrl));
 
-    history.push('/reset/password/initiate')
+    history.push('/reset/password/initiate');
   };
   const onSocialButtonClick = async (provider) => {
     localStorage.setItem('returnUrl', JSON.stringify(returnUrl));
@@ -63,15 +63,16 @@ const SignInPage = (props) => {
           <Input {...forPasswordInput}/>
         </FormSection>
         <FormSection>
-          <Button className={`${classes.actionButton} ${classes.resetPasswordLink}`}
-                  onClick={resetPassword}
-                  type='secondary'
+          <Button className={classes.actionButton}
+            onClick={resetPassword}
+            type='link'
           >
             Forgot password?
           </Button>
         </FormSection>
-        <FormSection  className={classes.center}>
+        <FormSection className={classes.center}>
           <Button onClick={trySignIn}
+            type='primary'
             className={classes.actionButton}
           >
             Sign In

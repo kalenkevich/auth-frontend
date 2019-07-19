@@ -1,13 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
-import { Avatar, LabeledText, Select } from '@zenvo/core-ui';
+import {
+  Avatar,
+  LabeledText,
+  Card,
+  Dropdown,
+  OptionItem,
+} from '@zenvo/core-ui';
 import UsersPageStyles from './UsersPageStyle';
 import UsersPageService from './UsersPageService';
 import AuthorizationContext from '../../context/AuthorizationContext';
+import Logger from '../../services/Logger';
 
 const UsersPage = ({ classes, history }) => {
-  const [ users, setUsers ] = useState([]);
+  const [users, setUsers] = useState([]);
   const { user: authorizedUser } = useContext(AuthorizationContext);
 
   const fetchUsers = async () => {
@@ -16,9 +23,7 @@ const UsersPage = ({ classes, history }) => {
 
       setUsers(fetchedUsers);
     } catch (error) {
-
-    } finally {
-
+      Logger.error(error);
     }
   };
 
@@ -29,18 +34,18 @@ const UsersPage = ({ classes, history }) => {
   const actionOptions = [{
     label: 'Go to profile',
     value: 'profile',
-    onClick: (user) => history.push(`/user/${user.id}`),
+    onClick: user => history.push(`/user/${user.id}`),
   }, {
     label: 'Deactivate (coming soon)',
     value: 'deactivate',
     disabled: true,
-    onClick: (user) => history.push(`/user/${user.id}`),
+    onClick: user => history.push(`/user/${user.id}`),
   }];
 
   return (
     <div className={classes.root}>
       {(users || []).map(user => (
-        <div className={classes.user} key={user.id}>
+        <Card className={classes.user} key={user.id}>
           <Avatar
             className={classes.userAvatar}
             url={user.avatarUrl}
@@ -62,20 +67,26 @@ const UsersPage = ({ classes, history }) => {
             content={(user.roles || []).join(', ')}
           />
           <div className={classes.userActionsWrapper}>
-            <Select
+            <Dropdown
+              label='Actions'
               className={classes.userActions}
-              preview={() => <div className={classes.userActions}>Actions</div>}
-              options={actionOptions}
-              onSelect={(option) => option.onClick(user)}
-            />
+            >
+              {(actionOptions || []).map((option, index) => (
+                <OptionItem
+                  key={index}
+                  {...option}
+                />
+              ))}
+            </Dropdown>
           </div>
-        </div>
+        </Card>
       ))}
     </div>
   );
 };
 
 UsersPage.propTypes = {
+  history: PropTypes.object,
   classes: PropTypes.object,
 };
 

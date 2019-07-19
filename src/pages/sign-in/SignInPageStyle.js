@@ -5,7 +5,7 @@ export default (theme) => ({
     justifyContent: 'center',
   },
   form: {
-    maxWidth: '600px',
+    maxWidth: '300px',
   },
   center: {
     '& > div': {
@@ -17,10 +17,5 @@ export default (theme) => ({
     '&:last-of-type': {
       marginRight: '0',
     },
-  },
-  resetPasswordLink: {
-    color: theme.linkColor || '#1F7BBD',
-    cursor: 'pointer',
-    border: 'none',
   },
 });
